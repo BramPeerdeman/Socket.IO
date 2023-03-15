@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Main.HTML</h1>
+    <div id="container"></div>
+
+    <div id="post" style="display:none">
+        <label for="message">Message</label>
+        <input type="text" name="message" id="message">
+        <input type="button" value="verstuur" onclick="sendMessage()">
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect', () => {
+            console.log(`Connected with id: ${socket.id}`);
+            // verstuur het socket-id 
+            socket.emit('setScreenID', socket.id, "main");
+        });
+
+        let clientID;
+        // wanneer het socket-id van de client wordt ontvangen, sla het op
+        socket.on('setClientID', (id) => {
+            console.log("ik weet het ID van de client: ", id);
+            clientID = id;
+            document.getElementById("container").innerHTML = "ik weet het ID van de client: " + clientID;
+            document.getElementById("post").style.display = "block";
+        });
+        
+
+        function sendMessage() {
+            let msg = document.getElementById("message").value;
+            console.log(msg);
+            if (clientID) {
+                // stuur het bericht naar de client
+                socket.emit("message", {
+                    msg,
+                    to: clientID
+                });
+            } else {
+                console.log('client ID not set');
+            }
+        }
+    </script>
+
+
+
+
+
+
+
+</body>
+
+</html>

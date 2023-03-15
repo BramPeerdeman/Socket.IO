@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Filmscherm</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="film.js" defer></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var screen1 = $("#screen1");
+            var screen2 = $("#screen2");
+            var screen3 = $("#screen3");
+
+            // Load movie posters from server
+            $.getJSON("posters.json", function (data) {
+                var posters = data.posters;
+                var currentPosterIndex = 0;
+
+                // Show the first poster on each screen
+                screen1.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+                screen2.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+                screen3.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+
+                // Update posters every 30 seconds
+                setInterval(function () {
+                    currentPosterIndex = (currentPosterIndex + 1) % posters.length;
+                    screen1.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+                    screen2.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+                    screen3.html("<img src='" + posters[currentPosterIndex].image + "'><h2>" + posters[currentPosterIndex].title + "</h2><p>" + posters[currentPosterIndex].description + "</p>");
+                }, 30000);
+
+                // Add button to simulate end of movie
+                $("#end-movie-button").click(function () {
+                    // Get the genre of the current poster
+                    var currentGenre = posters[currentPosterIndex].genre;
+
+                    // Filter posters by genre
+                    var genrePosters = posters.filter(function (poster) {
+                        return poster.genre === currentGenre;
+                    });
+
+                    // Show only the genre posters on each screen
+                    var genrePosterIndex = 0;
+                    screen1.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+                    screen2.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+                    screen3.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+
+                    // Update genre posters every 30 seconds
+                    setInterval(function () {
+                        genrePosterIndex = (genrePosterIndex + 1) % genrePosters.length;
+                        screen1.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+                        screen2.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+                        screen3.html("<img src='" + genrePosters[genrePosterIndex].image + "'><h2>" + genrePosters[genrePosterIndex].title + "</h2><p>" + genrePosters[genrePosterIndex].description + "</p>");
+                    }, 30000);
+                });
+            });
+
+            // Filter posters by "Binnenkort" category and show them on screen 3
+            $.getJSON("posters.json", function (data) {
+                var posters = data.posters;
+                var binnenkortPosters = posters.filter(function (poster) {
+                    return poster.category === "Binnenkort";
+                });
+                var binnenkortPosterIndex = 0;
+                screen3.html("<img src='" + binnenkortPosters[binnenkortPosterIndex].image + "'><h2>" + binnenkortPosters[binnenkortPosterIndex].title + "</h2><p>" + binnenkortPosters[binnenkortPosterIndex].description + "</p>");
+
+                // Update binnenkort posters every 30 seconds
+                setInterval(function () {
+                    binnenkortPosterIndex = (binnenkortPosterIndex + 1) % binnenkortPosters.length;
+                    screen3.html("<img src='" + binnenkortPosters[binnenkortPosterIndex].image + "'><h2>" + binnenkortPosters[binnenkortPosterIndex].title + "</h2><p>" + binnenkortPosters[binnenkortPosterIndex].description + "</p>");
+                }, 30000);
+            });
+        });
+    </script>
+  <style type="text/css">
+  	.screen {
+  		width: 33%;
+  		display: inline-block;
+  		vertical-align: top;
+  		text-align: center;
+  	}
+  </style>
+</head>
+<body>
+	<div class="screen" id="screen1"></div>
+	<div class="screen" id="screen2"></div>
+	<div class="screen" id="screen3"></div>
+	<button id="end-movie-button">Simulate End of Movie</button>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+    "genre": {
+      "action": [
+        {
+          "title": "Spider-Man: No Way Home",
+          "description": "Peter Parker krijgt te maken met een gevaarlijke dreiging die zijn leven op zijn kop zet.",
+          "image": "https://www.themoviedb.org/t/p/original/2B7RySyTsfyFSY00Zvc9IkTt4hi.jpg",
+          "release_date": "2021-12-16"
+        },
+        {
+          "title": "The Matrix Resurrections",
+          "description": "Neo en Trinity ontdekken dat de wereld niet is wat het lijkt te zijn.",
+          "image": "https://www.themoviedb.org/t/p/original/h7DZpJDORYsSjPzJNKMTrc82sYa.jpg",
+          "release_date": "2021-12-22"
+        }
+      ],
+      "comedy": [
+        {
+          "title": "Don't Look Up",
+          "description": "Twee astronomen proberen de wereld te waarschuwen voor een dreigende komeetinslag.",
+          "image": "https://www.themoviedb.org/t/p/original/kjMbDciooTbJPofVXgAoFjfX8Of.jpg",
+          "release_date": "2021-12-10"
+        },
+        {
+          "title": "The French Dispatch",
+          "description": "Een journalist schrijft over de gebeurtenissen in een Frans dorpje.",
+          "image": "https://www.themoviedb.org/t/p/original/vgrkNvvyD0RoM7PmYu4xNjl7lxQ.jpg",
+          "release_date": "2021-10-26"
+        }
+      ]
+    },
+    "upcoming": [
+      {
+        "title": "Avatar: The Way of Water",
+        "description": "Jake Sully keert terug naar Pandora.",
+        "image": "https://www.themoviedb.org/t/p/original/35nJJSduaIT1Gm4tN2hKLxxtxzU.jpg",
+        "release_date": "2022-12-14"
+      },
+      {
+        "title": "The Flash",
+        "description": "Barry Allen gebruikt zijn superkrachten om de tijd te manipuleren.",
+        "image": "https://www.themoviedb.org/t/p/original/zG2l9Svw4PTldWJAzC171Y3d6G8.jpg",
+        "release_date": "2022-11-03"
+      }
+    ]
+  }
